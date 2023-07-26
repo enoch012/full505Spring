@@ -8,4 +8,10 @@ import java.util.List;
 @Service
 public interface JpaBoardService {
   List<JpaBoardEntity> selectBoardList() throws Exception;
+
+  void saveBoard(JpaBoardEntity board);
+
+  JpaBoardEntity selectBoardDetail(int boardIdx);
+
+  void deleteBoard(int boardIdx);
 }

@@ -4,8 +4,7 @@ import com.board4.entity.JpaBoardEntity;
 import com.board4.service.JpaBoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class BoardController {
 
   @RequestMapping(value = "/", method = RequestMethod.GET)
   public String index() throws Exception {
-    return "Hello World";
+    return "index";
   }
 
   @RequestMapping(value = "/board", method = RequestMethod.GET)
@@ -34,5 +33,46 @@ public class BoardController {
     mv.addObject("boardList", boardList);
     return mv;
   }
+
+  // 게시판 글쓰기 페이지 (뷰)
+  @RequestMapping(value = "/board/write", method = RequestMethod.GET)
+  public String insertBoardView() throws Exception {
+    return "board/jpaBoardInsertView";
+  }
+
+  // 게시판 글 쓰기 페이지(Process)
+  @RequestMapping(value = "/board/write", method = RequestMethod.POST)
+  public String insertBoardProcess(JpaBoardEntity board) throws Exception {
+    jpaBoardService.saveBoard(board);
+    return "redirect:/board";
+  }
+
+  // 게시판 상세 글 보기
+  @GetMapping(value = "/board/{boardIdx}")
+  public ModelAndView selectBoardDetail(@PathVariable("boardIdx") int boardIdx) throws Exception {
+    ModelAndView mv = new ModelAndView("/board/jpaSelectBoardDetail");
+
+    JpaBoardEntity board = jpaBoardService.selectBoardDetail(boardIdx);
+    mv.addObject("board", board);
+
+    return mv;
+  }
+
+  // 게시판 글 수정
+  @PutMapping(value = "/board/{boardIdx}")
+  public String updateBoard(JpaBoardEntity board) throws Exception{
+    jpaBoardService.saveBoard(board);
+
+    return "redirect:/board";
+  }
+
+  // 게시판 글 수정
+  @DeleteMapping(value = "/board/{boardIdx}")
+  public String deleteBoard(@PathVariable("boardIdx") int boardIdx) throws Exception {
+    jpaBoardService.deleteBoard(boardIdx);
+
+    return "redirect:/board";
+  }
+
 
 }

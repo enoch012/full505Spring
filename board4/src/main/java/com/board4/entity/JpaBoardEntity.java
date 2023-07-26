@@ -1,41 +1,39 @@
 package com.board4.entity;
 
+
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "t_board")
-@AllArgsConstructor
 @NoArgsConstructor
-
+@AllArgsConstructor
 @Getter
 @Setter
 public class JpaBoardEntity {
-
   @Id
-  @GeneratedValue (strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int boardIdx;
 
-  @Column(name = "title", length =  100, nullable = false)
+  @Column(name = "title", length = 100, nullable = false)
   private String title;
 
-  @Column(nullable = false, length = 500)
+  @Column(length = 500, nullable = false)
   private String contents;
 
   @Column(nullable = false)
   private String createId;
 
   @Column(nullable = false)
-  private LocalDateTime createDt;
+  private LocalDateTime createDt = LocalDateTime.now();
 
-  // 기본값으로 다 사용시 @ColLum
-  private String UpdateId;
+  //  기본값으로 다 사용 시 @Column 어노테이션을 사용하지 않아도 됨
+  private String updateId;
+
   private LocalDateTime updateDt;
 
+  @Column(nullable = false)
   private int hitCnt;
 }

@@ -16,10 +16,7 @@
     <script></script>
 </head>
 <body>
-  <header class="p-5 mt-4 border-bottom">
-    <div class="container">
-      <h1 class="text-center">JPA 를 사용한 게시판</h1>
-    </div>
+  <header class="p-5 mt-4 border-bottom" th:replace="/layout/Header :: header">
   </header>
   <main class="container">
     <div class="row">
@@ -38,7 +35,7 @@
             <tr th:if="${#lists.size(boardList)} > 0" th:each="item : ${boardList}">
               <td th:text="${item.boardIdx}"></td>
               <td>
-                <a href="/jpa/board" th:attrappend="href=${item.boardIdx}" th:text="${item.title}"></a>
+                <a href="/board/" th:attrappend="href=${item.boardIdx}" th:text="${item.title}"></a>
               </td>
               <td th:text="${item.createId}"></td>
               <td th:text="${item.createDt}"></td>
@@ -49,15 +46,14 @@
             </tr>
           </tbody>
         </table>
-        <div>
-          <a href="/jpa/board/write" class="btn btn-dark px-3">글쓰기</a>
+        <div class="d-flex justify-content-end">
+          <a href="/board/write" class="btn btn-dark px-3">글쓰기</a>
         </div>
       </div>
 
     </div>
   </main>
-  <footer class="border-top mt-5 p-5">
-    <p class="lead muted text-center"> made by fullstack 505</p>
+  <footer class="border-top mt-5 p-5" th:replace="/layout/Footer :: footer">
   </footer>
 </body>
 </html>
