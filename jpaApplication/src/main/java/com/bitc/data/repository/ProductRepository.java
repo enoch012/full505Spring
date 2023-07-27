@@ -56,8 +56,8 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
   // (Is) Not : 값의 불일치 조건을 사용하는 자체 조건자 키워드, is를 생략할 수 있음
   ProductEntity findByNumberIsNot(Long number); // 지정한 번호와 같ㅈㅣ 않은 데이터를 조화
 
-  /*// (Is) Null, (Is)NotNull : 값이 null 인지 확인하는 조건자 키워드
-  List<ProductEntity> findByUpdateAtNull(); // 수정된 데이터가 null인 것만 조회
+  // (Is) Null, (Is)NotNull : 값이 null 인지 확인하는 조건자 키워드
+  /*List<ProductEntity> findByUpdateAtNull(); // 수정된 데이터가 null인 것만 조회
   List<ProductEntity> findByUpdatedAtIsNull();
   List<ProductEntity> findByUpdatedAtNotNull(); // 수정된 데이터가 Null이 아닌것만 조회
 
@@ -70,7 +70,7 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
 
   // And Or : 조건을 추가하는 키워드
   ProductEntity findByNumberAndName(Long number, String name); // and 명령으로 조회 조건을 추가, 지정한 번호와 지정한 이름이 같은 데이터를 조회
-  ProductEntity findByNumberOrName(Long numvber, String name); // or 명령으로 조회 조건을 추가, 지정한 번호나 지정한 이름을 가지고 있는 데이터를 조회
+  ProductEntity findByNumberOrName(Long number, String name); // or 명령으로 조회 조건을 추가, 지정한 번호나 지정한 이름을 가지고 있는 데이터를 조회
 
   // (Is)Greaterthan, (Is)Lessthan, (Is)Between : 숫자나 datetime 컬럼을 대상으로 비교 연산에 사용할 수 있는 조건자 키워드
   // greaterthan, Lessthan 은 비교 대상에 대한 초과 및 미만을 비교 연산으로 수행.
@@ -135,19 +135,19 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
   // AS 명령 사용하여 클래스의 별명을 입력
   // SELEC 절에 클래스의 별명, 컬럼명로 출력하고자 하는 컬러만 입력
 // WHERE절에선 클래스 별명, 컬럼명 형태로 적용함
-  @Query("SELECT p FROM ProductEntity AS p WHERE p.name = '만년필'")
+  @Query("SELECT p FROM ProductEntity AS p WHERE p.name = '만년필' ")
   ProductEntity querySelectName();
 
   // 메소드의 매개변수를 쿼리문에 적용할 경우 ?순번 형식으로 입력하여 데이터를 매칭함
   // 순번은 1번부터 시작하고, 매개변수의 순서대로 매칭이 됨
 
-  @Query("SELECT p FROM ProductEntity AS p WHERE P.name = ?1")
+  @Query("SELECT p FROM ProductEntity AS p WHERE p.name = ?1 ")
   ProductEntity querySelectName(String name);
 
   // 메소드의 매개변수를 쿼리문에 적용할 경우 :매개변수명 형식으로 입력하는 방법
   // :매개변수 방식은 메소드의 매개변수 앞에 @Param("컬럼명") 을 반드시 사용해야함
   // :매개변수 방식은 메소드의 매개변수 순서와 상관이 없음
-  @Query("SELECT p FROM ProductEntity AS p WHERE p.name = :name AND p.price = :price")
-  ProductEntity querySelectNamePrice (@Param("name") String name, @Param("price") int price);
+  @Query("SELECT p FROM ProductEntity AS p WHERE p.name = :name AND p.price = :price ")
+  ProductEntity querySelectNamePrice(@Param("name") String name, @Param("price") int price);
 
 }

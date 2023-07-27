@@ -105,6 +105,6 @@ public class ProductServiceImpl implements ProductService{
   public void querySelectName() {
     ProductEntity prod1 = productRepository.querySelectName();
     // ProductEntity prod2= productRepository.querySelectName("노아");
-    ProductEntity prod3 = productRepository.querySelectNamePrice("유다", 7000);
+    ProductEntity prod3 = productRepository.querySelectNamePrice("만년필", 6000);
   }
 }
